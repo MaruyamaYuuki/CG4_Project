@@ -18,6 +18,12 @@ public:
 	// 描画
 	void Draw();
 
+    /// <summary>
+    /// パーティクル発生
+    /// </summary>
+	/// <param name="position">位置</param>
+	void ParticleBorn(KamataEngine::Vector3 position);
+
 private:
 
 
