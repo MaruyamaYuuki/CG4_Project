@@ -8,7 +8,8 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="model">モデル</param>
-	void Initialize(KamataEngine::Model* model);
+	/// <param name"position">位置</param>
+	void Initialize(KamataEngine::Model* model, KamataEngine::Vector3 position);
 
 	/// <summary>
 	/// 更新
