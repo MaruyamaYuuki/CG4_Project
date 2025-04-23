@@ -12,22 +12,31 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() { 
 	delete modelParticle_;
-	for (Particle* particle : particles_) {
+	delete modelEffect_;
+	/*	for (Particle* particle : particles_) {
 		delete particle;
 	}
-	particles_.clear();
+	particles_.clear();*/
+	delete effect_;
 }
+
 
 void GameScene::Initialize() {
 	modelParticle_ = Model::CreateSphere(4, 4); 
+	modelEffect_ = Model::CreateFromOBJ("effect", true);
 	camera_.Initialize();
 
 	// 乱数の初期化
-	srand((unsigned)time(NULL));
+	//srand((unsigned)time(NULL));
+
+	// エフェクトの生成
+	effect_ = new Effect();
+	// エフェクトの初期化
+	effect_->Initialize(modelEffect_);
 }
 
 void GameScene::Update() {
-	// 確率で発生
+	/*	// 確率で発生
 	if (rand() % 20 == 0) {
        	// 発生位置は乱数
     	Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
@@ -48,7 +57,10 @@ void GameScene::Update() {
 			return true;
 		}
 		return false;
-	});
+	});*/
+
+
+	effect_->Update();
 }
 
 void GameScene::Draw() {
@@ -59,9 +71,12 @@ void GameScene::Draw() {
 	Model::PreDraw(dxCommon->GetCommandList());
 
 	// パーティクルの描画
-	for (Particle* particle : particles_) {
-		particle->Draw(camera_);
-	}
+	//for (Particle* particle : particles_) {
+	//	particle->Draw(camera_);
+	//}
+
+	// エフェクトの描画
+	effect_->Draw(camera_);
 
 	// 3Dモデル描画後処理
 	Model::PostDraw();
