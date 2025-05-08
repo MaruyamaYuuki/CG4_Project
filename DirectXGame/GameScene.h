@@ -25,6 +25,12 @@ public:
 	/// <param name="position">位置</param>
 	void ParticleBorn(KamataEngine::Vector3 position);
 
+    /// <summary>
+    /// エフェクト発生
+    /// </summary>
+	/// <param name="position">位置</param>
+	void EffectBorn(KamataEngine::Vector3 position);
+
 private:
 
 	// パーティクル3Dモデルデータ

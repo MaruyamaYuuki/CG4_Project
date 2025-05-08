@@ -4,15 +4,15 @@
 using namespace KamataEngine;
 using namespace MathUtility;
 
-void Effect::Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate) {
+void Effect::Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position) {
 	// NULLポインタチェック
 	assert(model);
 	model_ = model;
 
-	scale_ = scale;
-	rotation_ = rotate;
-
+	worldTransform_.scale_ = scale;
+	worldTransform_.rotation_ = rotate;
 	worldTransform_.Initialize();
+	worldTransform_.translation_ = position;
 
 	// 色の設定
 	objectColor_.Initialize();
@@ -20,9 +20,6 @@ void Effect::Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale,
 }
 
 void Effect::Update() { 
-
-	worldTransform_.scale_ = scale_;
-	worldTransform_.rotation_ = rotation_;
 
 	// 終了なら何もしない
 	if (isFinished_) {

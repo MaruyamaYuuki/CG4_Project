@@ -33,33 +33,9 @@ void GameScene::Initialize() {
 	camera_.Initialize();
 
 	// 乱数の初期化
-	//srand((unsigned)time(NULL));
+	srand((unsigned)time(NULL));
 
-	int effectCount = 10;
 
-	// エフェクトの生成
-	for (int i = 0; i < effectCount; i++) {
-		// 生成
-		Effect* effect = new Effect();
-
-	    // 放射状の基準角度
-		float baseAngle = (360.0f / effectCount) * i;
-
-		// ランダムなオフセットを加える
-		float finalAngle = baseAngle + rotZDist(randomEngine);
-
-		// ラジアンに変換
-		float angleRad = float(finalAngle * std::numbers::pi / 180.0f);
-
-    	// サイズ
-    	Vector3 scale = {0.3f, scaleYDist(randomEngine), 1.0f};
-    	// 角度
-    	Vector3 rotation = {0.0f, 0.0f, angleRad};
-		// 初期化
-		effect->Initialize(modelEffect_, scale, rotation);
-		// リストに追加
-		effects_.push_back(effect);
-	}
 }
 
 void GameScene::Update() {
@@ -71,7 +47,6 @@ void GameScene::Update() {
     	// パーティクル発生
     	ParticleBorn(position);
 	}
-
 
 	// パーティクルの更新
 	for (Particle* particle : particles_) {
@@ -85,6 +60,14 @@ void GameScene::Update() {
 		}
 		return false;
 	});*/
+
+	// 確率で発生
+	if (rand() % 20 == 0) {
+		// 発生位置は乱数
+		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
+		// エフェクト発生
+		EffectBorn(position);
+	}
 
 	// エフェクトの更新
 	for (Effect* effect : effects_) {
@@ -137,5 +120,32 @@ void GameScene::ParticleBorn(Vector3 position) {
 
 		// リストに追加
 		particles_.push_back(particle);
+	}
+}
+
+void GameScene::EffectBorn(Vector3 position) {
+	int effectCount = 10;
+
+	for (int i = 0; i < effectCount; i++) {
+		// 生成
+		Effect* effect = new Effect();
+
+		// 放射状の基準角度
+		float baseAngle = (360.0f / effectCount) * i;
+
+		// ランダムなオフセットを加える
+		float finalAngle = baseAngle + rotZDist(randomEngine);
+
+		// ラジアンに変換
+		float angleRad = float(finalAngle * std::numbers::pi / 180.0f);
+
+		// サイズ
+		Vector3 scale = {0.3f, scaleYDist(randomEngine), 1.0f};
+		// 角度
+		Vector3 rotation = {0.0f, 0.0f, angleRad};
+		// 初期化
+		effect->Initialize(modelEffect_, scale, rotation, position);
+		// リストに追加
+		effects_.push_back(effect);
 	}
 }
