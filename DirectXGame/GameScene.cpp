@@ -4,6 +4,8 @@
 std::random_device seedGenerator;
 std::mt19937 randomEngine(seedGenerator());
 std::uniform_real_distribution<float> distribution(-1.0f, 1.0f);
+std::uniform_real_distribution<float> scaleYDist(2.0f, 4.0f);
+std::uniform_real_distribution<float> rotZDist(0.0f, 3.14f);
 
 using namespace KamataEngine;
 using namespace MathUtility;
@@ -29,10 +31,13 @@ void GameScene::Initialize() {
 	// 乱数の初期化
 	//srand((unsigned)time(NULL));
 
+	Vector3 scale = {0.3f, scaleYDist(randomEngine), 1.0f};
+	Vector3 rotation = {0.0f, 0.0f, rotZDist(randomEngine)};
+
 	// エフェクトの生成
 	effect_ = new Effect();
 	// エフェクトの初期化
-	effect_->Initialize(modelEffect_);
+	effect_->Initialize(modelEffect_, scale, rotation);
 }
 
 void GameScene::Update() {
