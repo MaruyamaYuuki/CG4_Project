@@ -7,6 +7,7 @@ std::mt19937 randomEngine(seedGenerator());
 std::uniform_real_distribution<float> distribution(-1.0f, 1.0f);
 std::uniform_real_distribution<float> scaleYDist(2.0f, 4.0f);
 std::uniform_real_distribution<float> rotZDist(0.0f, 3.14f);
+std::uniform_real_distribution<float> colorDist(0.0f, 1.0f);
 
 using namespace KamataEngine;
 using namespace MathUtility;
@@ -62,7 +63,7 @@ void GameScene::Update() {
 	});*/
 
 	// 確率で発生
-	if (rand() % 20 == 0) {
+	if (rand() % 5 == 0) {
 		// 発生位置は乱数
 		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
 		// エフェクト発生
@@ -126,6 +127,9 @@ void GameScene::ParticleBorn(Vector3 position) {
 void GameScene::EffectBorn(Vector3 position) {
 	int effectCount = 10;
 
+		// 色
+		Vector4 color = {colorDist(randomEngine), colorDist(randomEngine), colorDist(randomEngine), 1};
+
 	for (int i = 0; i < effectCount; i++) {
 		// 生成
 		Effect* effect = new Effect();
@@ -143,8 +147,9 @@ void GameScene::EffectBorn(Vector3 position) {
 		Vector3 scale = {0.3f, scaleYDist(randomEngine), 1.0f};
 		// 角度
 		Vector3 rotation = {0.0f, 0.0f, angleRad};
+
 		// 初期化
-		effect->Initialize(modelEffect_, scale, rotation, position);
+		effect->Initialize(modelEffect_, scale, rotation, position, color);
 		// リストに追加
 		effects_.push_back(effect);
 	}
