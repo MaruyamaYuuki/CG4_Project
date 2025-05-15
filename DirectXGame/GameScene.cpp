@@ -21,22 +21,30 @@ GameScene::~GameScene() {
 		delete particle;
 	}
 	particles_.clear();*/
-	for (Effect* effect : effects_) {
+
+	/*	for (Effect* effect : effects_) {
 		delete effect;
 	}
-	effects_.clear();
+	effects_.clear();*/
+	ModelPrimitive::StaticFinalize();
+	delete cubeModelrimitive_;
 }
 
 
 void GameScene::Initialize() {
+	worldTranform_.Initialize();
+
 	modelParticle_ = Model::CreateSphere(4, 4); 
 	modelEffect_ = Model::CreateFromOBJ("effect", true);
 	camera_.Initialize();
 
+	ModelPrimitive::StaticInitialize();
+
+	UVCheckerTexture_ = TextureManager::Load("uvChecker.png");
+	cubeModelrimitive_ = ModelPrimitive::Create();
+
 	// 乱数の初期化
-	srand((unsigned)time(NULL));
-
-
+	//srand((unsigned)time(NULL));
 }
 
 void GameScene::Update() {
@@ -62,7 +70,7 @@ void GameScene::Update() {
 		return false;
 	});*/
 
-	// 確率で発生
+	/*	// 確率で発生
 	if (rand() % 5 == 0) {
 		// 発生位置は乱数
 		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
@@ -81,7 +89,8 @@ void GameScene::Update() {
 			return true;
 		}
 		return false;
-	});
+	});*/
+
 }
 
 void GameScene::Draw() {
@@ -89,7 +98,7 @@ void GameScene::Draw() {
 	KamataEngine::DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
 	// 3Dモデル描画前処理
-	Model::PreDraw(dxCommon->GetCommandList());
+	ModelPrimitive::PreDraw(dxCommon->GetCommandList());
 
 	// パーティクルの描画
 	//for (Particle* particle : particles_) {
@@ -97,12 +106,14 @@ void GameScene::Draw() {
 	//}
 
 	// エフェクトの描画
-	for (Effect* effect : effects_) {
-		effect->Draw(camera_);
-	}
+	//for (Effect* effect : effects_) {
+	//	effect->Draw(camera_);
+	//}
+
+	cubeModelrimitive_->Draw(worldTranform_, camera_, UVCheckerTexture_);
 
 	// 3Dモデル描画後処理
-	Model::PostDraw();
+	ModelPrimitive::PostDraw();
 }
 
 void GameScene::ParticleBorn(Vector3 position) {

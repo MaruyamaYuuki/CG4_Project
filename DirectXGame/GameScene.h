@@ -2,6 +2,7 @@
 #include "KamataEngine.h"
 #include "Particle.h"
 #include "Effect.h"
+#include "ModelPrimitive.h"
 
 // ゲームシーン
 class GameScene {
@@ -32,6 +33,8 @@ public:
 	void EffectBorn(KamataEngine::Vector3 position);
 
 private:
+	// ワールド変換データ
+	KamataEngine::WorldTransform worldTranform_;
 
 	// パーティクル3Dモデルデータ
 	KamataEngine::Model* modelParticle_ = nullptr;
@@ -45,4 +48,9 @@ private:
 	std::list<Particle*> particles_;
 	// エフェクト
 	std::list<Effect*> effects_;
+
+	// モデル
+	KamataEngine::ModelPrimitive* cubeModelrimitive_ = nullptr;
+	// テクスチャハンドル
+	uint32_t UVCheckerTexture_ = 0;
 };
