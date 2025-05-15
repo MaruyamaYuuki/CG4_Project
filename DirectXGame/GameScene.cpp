@@ -27,7 +27,7 @@ GameScene::~GameScene() {
 	}
 	effects_.clear();*/
 	ModelPrimitive::StaticFinalize();
-	delete cubeModelrimitive_;
+	delete cubeModelPrimitive_;
 }
 
 
@@ -41,7 +41,9 @@ void GameScene::Initialize() {
 	ModelPrimitive::StaticInitialize();
 
 	UVCheckerTexture_ = TextureManager::Load("uvChecker.png");
-	cubeModelrimitive_ = ModelPrimitive::Create();
+
+	cubeModelPrimitive_ = new ModelPrimitive();
+	cubeModelPrimitive_ = ModelPrimitive::CreateSquare();
 
 	// 乱数の初期化
 	//srand((unsigned)time(NULL));
@@ -110,7 +112,7 @@ void GameScene::Draw() {
 	//	effect->Draw(camera_);
 	//}
 
-	cubeModelrimitive_->Draw(worldTranform_, camera_, UVCheckerTexture_);
+	cubeModelPrimitive_->Draw(worldTranform_, camera_, UVCheckerTexture_);
 
 	// 3Dモデル描画後処理
 	ModelPrimitive::PostDraw();

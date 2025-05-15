@@ -50,7 +50,7 @@ private:
 	std::list<Effect*> effects_;
 
 	// モデル
-	KamataEngine::ModelPrimitive* cubeModelrimitive_ = nullptr;
+	KamataEngine::ModelPrimitive* cubeModelPrimitive_ = nullptr;
 	// テクスチャハンドル
 	uint32_t UVCheckerTexture_ = 0;
 };

@@ -138,6 +138,11 @@ public: // 静的メンバ関数
 	static ModelPrimitive* CreateSphere(uint32_t divisionVertial = 10, uint32_t divisionHorizontal = 10);
 
 	/// <summary>
+	/// 四角形モデル生成
+	/// </summary>
+	static ModelPrimitive* CreateSquare();
+
+	/// <summary>
 	/// 描画前処理
 	/// </summary>
 	/// <param name="commandList">描画コマンドリスト</param>
