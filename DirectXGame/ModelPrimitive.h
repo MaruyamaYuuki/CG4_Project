@@ -140,7 +140,7 @@ public: // 静的メンバ関数
 	/// <summary>
 	/// 四角形モデル生成
 	/// </summary>
-	static ModelPrimitive* CreateSquare();
+	static ModelPrimitive* CreateSquare(int count);
 
 	/// <summary>
 	/// 描画前処理

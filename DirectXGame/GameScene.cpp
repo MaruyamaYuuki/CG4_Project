@@ -43,7 +43,7 @@ void GameScene::Initialize() {
 	UVCheckerTexture_ = TextureManager::Load("uvChecker.png");
 
 	cubeModelPrimitive_ = new ModelPrimitive();
-	cubeModelPrimitive_ = ModelPrimitive::CreateSquare();
+	cubeModelPrimitive_ = ModelPrimitive::CreateSquare(5);
 
 	// 乱数の初期化
 	//srand((unsigned)time(NULL));
