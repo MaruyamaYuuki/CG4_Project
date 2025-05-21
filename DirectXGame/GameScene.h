@@ -2,7 +2,7 @@
 #include "KamataEngine.h"
 #include "Particle.h"
 #include "Effect.h"
-#include "ModelPrimitive.h"
+#include "ModelPrim.h"
 
 // ゲームシーン
 class GameScene {
@@ -50,7 +50,7 @@ private:
 	std::list<Effect*> effects_;
 
 	// モデル
-	KamataEngine::ModelPrimitive* cubeModelPrimitive_ = nullptr;
+	KamataEngine::ModelPrim* cubeModelPrim_ = nullptr;
 	// テクスチャハンドル
 	uint32_t UVCheckerTexture_ = 0;
 };

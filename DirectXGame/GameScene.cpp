@@ -26,8 +26,8 @@ GameScene::~GameScene() {
 		delete effect;
 	}
 	effects_.clear();*/
-	ModelPrimitive::StaticFinalize();
-	delete cubeModelPrimitive_;
+	ModelPrim::StaticFinalize();
+	delete cubeModelPrim_;
 }
 
 
@@ -38,12 +38,12 @@ void GameScene::Initialize() {
 	modelEffect_ = Model::CreateFromOBJ("effect", true);
 	camera_.Initialize();
 
-	ModelPrimitive::StaticInitialize();
+	ModelPrim::StaticInitialize();
 
 	UVCheckerTexture_ = TextureManager::Load("uvChecker.png");
 
-	cubeModelPrimitive_ = new ModelPrimitive();
-	cubeModelPrimitive_ = ModelPrimitive::CreateSquare(5);
+	cubeModelPrim_ = new ModelPrim();
+	cubeModelPrim_ = ModelPrim::CreateSquare(5);
 
 	// 乱数の初期化
 	//srand((unsigned)time(NULL));
@@ -100,7 +100,7 @@ void GameScene::Draw() {
 	KamataEngine::DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
 	// 3Dモデル描画前処理
-	ModelPrimitive::PreDraw(dxCommon->GetCommandList());
+	ModelPrim::PreDraw(dxCommon->GetCommandList());
 
 	// パーティクルの描画
 	//for (Particle* particle : particles_) {
@@ -112,10 +112,10 @@ void GameScene::Draw() {
 	//	effect->Draw(camera_);
 	//}
 
-	cubeModelPrimitive_->Draw(worldTranform_, camera_, UVCheckerTexture_);
+	cubeModelPrim_->Draw(worldTranform_, camera_, UVCheckerTexture_);
 
 	// 3Dモデル描画後処理
-	ModelPrimitive::PostDraw();
+	ModelPrim::PostDraw();
 }
 
 void GameScene::ParticleBorn(Vector3 position) {

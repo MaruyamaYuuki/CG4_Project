@@ -16,9 +16,9 @@ class WorldTransform;
 /// <summary>
 /// モデル共通データ
 /// </summary>
-class ModelCommonPrimitive {
+class ModelCommonPrim {
 public:
-	static ModelCommonPrimitive* GetInstance();
+	static ModelCommonPrim* GetInstance();
 	static void Terminate();
 
 	/// <summary>
@@ -56,10 +56,10 @@ public:
 	ObjectColor* GetObjectColor() const { return defaultObjectColor_.get(); }
 
 private:
-	ModelCommonPrimitive() = default;
-	~ModelCommonPrimitive() = default;
-	ModelCommonPrimitive(ModelCommonPrimitive&) = delete;
-	ModelCommonPrimitive& operator=(ModelCommonPrimitive&) = delete;
+	ModelCommonPrim() = default;
+	~ModelCommonPrim() = default;
+	ModelCommonPrim(ModelCommonPrim&) = delete;
+	ModelCommonPrim& operator=(ModelCommonPrim&) = delete;
 
 	/// <summary>
 	/// グラフィックスパイプラインの初期化
@@ -67,7 +67,7 @@ private:
 	void InitializeGraphicsPipeline();
 
 	// シングルトンインスタンス
-	static ModelCommonPrimitive* sInstance_;
+	static ModelCommonPrim* sInstance_;
 
 	// デスクリプタサイズ
 	UINT descriptorHandleIncrementSize_ = 0u;
@@ -86,7 +86,7 @@ private:
 /// <summary>
 /// モデルデータ
 /// </summary>
-class ModelPrimitive {
+class ModelPrim {
 public: // 列挙子
 	/// <summary>
 	/// ルートパラメータ番号
@@ -119,7 +119,7 @@ public: // 静的メンバ関数
 	/// 3Dモデル生成
 	/// </summary>
 	/// <returns></returns>
-	static ModelPrimitive* Create();
+	static ModelPrim* Create();
 
 	/// <summary>
 	/// OBJファイルからメッシュ生成
@@ -127,7 +127,7 @@ public: // 静的メンバ関数
 	/// <param name="modelname">モデル名</param>
 	/// <param name="modelname">エッジ平滑化フラグ</param>
 	/// <returns>生成されたモデル</returns>
-	static ModelPrimitive* CreateFromOBJ(const std::string& modelname, bool smoothing = false);
+	static ModelPrim* CreateFromOBJ(const std::string& modelname, bool smoothing = false);
 
 	/// <summary>
 	/// 球モデル生成
@@ -135,12 +135,12 @@ public: // 静的メンバ関数
 	/// <param name="divisionVertial">垂直方向（緯度）分割数</param>
 	/// <param name="divisionHorizontal">水平方向（経度）分割数</param>
 	/// <returns>生成されたモデル</returns>
-	static ModelPrimitive* CreateSphere(uint32_t divisionVertial = 10, uint32_t divisionHorizontal = 10);
+	static ModelPrim* CreateSphere(uint32_t divisionVertial = 10, uint32_t divisionHorizontal = 10);
 
 	/// <summary>
 	/// 四角形モデル生成
 	/// </summary>
-	static ModelPrimitive* CreateSquare(int count);
+	static ModelPrim* CreateSquare(int count);
 
 	/// <summary>
 	/// 描画前処理
@@ -154,7 +154,7 @@ public: // 静的メンバ関数
 	static void PostDraw();
 
 public: // メンバ関数
-	~ModelPrimitive() = default;
+	~ModelPrim() = default;
 
 	/// <summary>
 	/// 描画
