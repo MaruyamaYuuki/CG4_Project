@@ -143,6 +143,11 @@ public: // 静的メンバ関数
 	static ModelPrim* CreateSquare(int count);
 
 	/// <summary>
+	/// 四角形モデルも使用した円生成
+	/// </summary>
+	static ModelPrim* CreateRing(int count);
+
+	/// <summary>
 	/// 描画前処理
 	/// </summary>
 	/// <param name="commandList">描画コマンドリスト</param>

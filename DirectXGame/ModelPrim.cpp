@@ -182,6 +182,8 @@ ModelPrim* ModelPrim::CreateSquare(int count) {
 	return instance;
 }
 
+ModelPrim* ModelPrim::CreateRing(int count) { return nullptr; }
+
 void ModelPrim::PreDraw(ID3D12GraphicsCommandList* commandList) { ModelCommonPrim::GetInstance()->PreDraw(commandList); }
 
 void ModelPrim::PostDraw() { ModelCommonPrim::GetInstance()->PostDraw(); }
