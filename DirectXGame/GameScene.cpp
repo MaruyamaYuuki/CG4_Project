@@ -128,9 +128,6 @@ void GameScene::ParticleBorn(Vector3 position) {
 void GameScene::EffectBorn(Vector3 position) {
 	int effectCount = 10;
 
-		// 色
-		Vector4 color = {colorDist(randomEngine), colorDist(randomEngine), colorDist(randomEngine), 1};
-
 	for (int i = 0; i < effectCount; i++) {
 		// 生成
 		Effect* effect = new Effect();
@@ -156,7 +153,7 @@ void GameScene::EffectBorn(Vector3 position) {
 		Vector3 rotation = {0.0f, 0.0f, angleRad};
 
 		// 初期化
-		effect->Initialize(modelEffect_, scale, rotation, position, color, velocity);
+		effect->Initialize(modelEffect_, scale, rotation, position, velocity);
 		// リストに追加
 		effects_.push_back(effect);
 	}

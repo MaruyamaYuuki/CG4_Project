@@ -5,7 +5,7 @@ using namespace KamataEngine;
 using namespace MathUtility;
 
 void Effect::Initialize(
-    KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector4 color, KamataEngine::Vector3 velocity) {
+    KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector3 velocity) {
 	// NULLポインタチェック
 	assert(model);
 	model_ = model;
@@ -17,7 +17,7 @@ void Effect::Initialize(
 
 	// 色の設定
 	objectColor_.Initialize();
-	color_ = color;
+	color_ = {0.4f, 0.7f, 1.0f, 1.0f};
 
 	velocity_ = velocity;
 }

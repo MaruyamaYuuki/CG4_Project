@@ -8,7 +8,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector4 color, KamataEngine::Vector3 velocity);
+	void Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector3 velocity);
 
 	/// <summary>
 	/// 更新
