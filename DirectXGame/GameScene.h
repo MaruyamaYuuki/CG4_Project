@@ -32,6 +32,7 @@ public:
 	void EffectBorn(KamataEngine::Vector3 position);
 
 private:
+	KamataEngine::Input* input_ = nullptr;
 
 	// パーティクル3Dモデルデータ
 	KamataEngine::Model* modelParticle_ = nullptr;

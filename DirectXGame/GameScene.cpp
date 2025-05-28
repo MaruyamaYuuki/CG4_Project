@@ -5,7 +5,7 @@
 std::random_device seedGenerator;
 std::mt19937 randomEngine(seedGenerator());
 std::uniform_real_distribution<float> distribution(-1.0f, 1.0f);
-std::uniform_real_distribution<float> scaleYDist(2.0f, 4.0f);
+std::uniform_real_distribution<float> scaleYDist(1.0f, 3.0f);
 std::uniform_real_distribution<float> rotZDist(0.0f, 3.14f);
 std::uniform_real_distribution<float> colorDist(0.0f, 1.0f);
 
@@ -29,6 +29,8 @@ GameScene::~GameScene() {
 
 
 void GameScene::Initialize() {
+	input_ = Input::GetInstance();
+
 	modelParticle_ = Model::CreateSphere(4, 4); 
 	modelEffect_ = Model::CreateFromOBJ("effect", true);
 	camera_.Initialize();
@@ -62,11 +64,10 @@ void GameScene::Update() {
 		return false;
 	});*/
 
-	// 確率で発生
-	if (rand() % 5 == 0) {
+    if (input_->TriggerKey(DIK_SPACE)) {
 		// 発生位置は乱数
-		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
-		// エフェクト発生
+		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0.0f};
+
 		EffectBorn(position);
 	}
 
@@ -136,12 +137,18 @@ void GameScene::EffectBorn(Vector3 position) {
 
 		// 放射状の基準角度
 		float baseAngle = (360.0f / effectCount) * i;
-
 		// ランダムなオフセットを加える
 		float finalAngle = baseAngle + rotZDist(randomEngine);
-
 		// ラジアンに変換
 		float angleRad = float(finalAngle * std::numbers::pi / 180.0f);
+
+        // ランダム速度（破片の飛び出し）
+		float speed = 0.5f + distribution(randomEngine); // 0.5～1.5くらい
+		Vector3 velocity = {
+		    cosf(angleRad) * speed, 
+			sinf(angleRad) * speed,
+		    distribution(randomEngine) * 0.5f // Z方向も少し
+		};
 
 		// サイズ
 		Vector3 scale = {0.3f, scaleYDist(randomEngine), 1.0f};
@@ -149,7 +156,7 @@ void GameScene::EffectBorn(Vector3 position) {
 		Vector3 rotation = {0.0f, 0.0f, angleRad};
 
 		// 初期化
-		effect->Initialize(modelEffect_, scale, rotation, position, color);
+		effect->Initialize(modelEffect_, scale, rotation, position, color, velocity);
 		// リストに追加
 		effects_.push_back(effect);
 	}

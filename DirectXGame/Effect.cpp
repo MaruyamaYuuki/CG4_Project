@@ -4,7 +4,8 @@
 using namespace KamataEngine;
 using namespace MathUtility;
 
-void Effect::Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector4 color) {
+void Effect::Initialize(
+    KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector4 color, KamataEngine::Vector3 velocity) {
 	// NULLポインタチェック
 	assert(model);
 	model_ = model;
@@ -17,13 +18,18 @@ void Effect::Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale,
 	// 色の設定
 	objectColor_.Initialize();
 	color_ = color;
+
+	velocity_ = velocity;
 }
 
 void Effect::Update() { 
 
-	worldTransform_.rotation_.z += 0.5f;
-	worldTransform_.translation_.x -= 0.5f;
-	worldTransform_.translation_.y -= 0.5f;
+	// 飛ぶ処理を追加
+	worldTransform_.translation_ += velocity_;
+
+    // 重力（落下）効果
+	velocity_.y -= 0.02f;
+
 	worldTransform_.scale_.y -= 0.05f;
 
 	// 終了なら何もしない

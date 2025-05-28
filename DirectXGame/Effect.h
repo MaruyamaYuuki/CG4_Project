@@ -1,5 +1,6 @@
 #pragma once
 #include "KamataEngine.h"
+#include <math/Vector3.h>
 
 // エフェクト
 class Effect {
@@ -7,7 +8,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector4 color);
+	void Initialize(KamataEngine::Model* model, KamataEngine::Vector3 scale, KamataEngine::Vector3 rotate, KamataEngine::Vector3 position, KamataEngine::Vector4 color, KamataEngine::Vector3 velocity);
 
 	/// <summary>
 	/// 更新
@@ -40,4 +41,7 @@ private:
 	float counter_ = false;
 	// 存続時間（消滅までの時間）<秒>
 	const float kDuration = 1.0f;
+
+    // 飛んでいく方向と速度
+	KamataEngine::Vector3 velocity_;        
 };
