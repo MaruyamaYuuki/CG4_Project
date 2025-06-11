@@ -17,82 +17,52 @@ GameScene::GameScene() {}
 GameScene::~GameScene() { 
 	delete modelParticle_;
 	delete modelEffect_;
-	/*	for (Particle* particle : particles_) {
-		delete particle;
-	}
-	particles_.clear();*/
-
-	/*	for (Effect* effect : effects_) {
-		delete effect;
-	}
-	effects_.clear();*/
 	ModelPrim::StaticFinalize();
 	delete cubeModelPrim_;
 }
 
 
 void GameScene::Initialize() {
+	input = Input::GetInstance();
+
 	worldTranform_.Initialize();
 
 	modelParticle_ = Model::CreateSphere(4, 4); 
 	modelEffect_ = Model::CreateFromOBJ("effect", true);
 	camera_.Initialize();
+	
 
 	ModelPrim::StaticInitialize();
 
 	UVCheckerTexture_ = TextureManager::Load("uvChecker.png");
 
 	cubeModelPrim_ = new ModelPrim();
-	cubeModelPrim_ = ModelPrim::CreateSquare(5);
+	cubeModelPrim_ = ModelPrim::CreateRing(5);
 
-	// 乱数の初期化
-	//srand((unsigned)time(NULL));
+	 
+	debugCamera_ = new DebugCamera(1280, 720);
 }
 
 void GameScene::Update() {
-	/*	// 確率で発生
-	if (rand() % 20 == 0) {
-       	// 発生位置は乱数
-    	Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
 
-    	// パーティクル発生
-    	ParticleBorn(position);
-	}
-
-	// パーティクルの更新
-	for (Particle* particle : particles_) {
-		particle->Update();
-	}
-	// 終了フラグの立ったパーティクルを削除
-	particles_.remove_if([](Particle* particle) {
-		if (particle->IsFinished()) {
-			delete particle;
-			return true;
+	if (input->TriggerKey(DIK_D)) {
+		if (!isDebugCameraActive_) {
+			isDebugCameraActive_ = true;
+		} else {
+			isDebugCameraActive_ = false;
 		}
-		return false;
-	});*/
-
-	/*	// 確率で発生
-	if (rand() % 5 == 0) {
-		// 発生位置は乱数
-		Vector3 position = {distribution(randomEngine) * 30.0f, distribution(randomEngine) * 20.0f, 0};
-		// エフェクト発生
-		EffectBorn(position);
 	}
 
-	// エフェクトの更新
-	for (Effect* effect : effects_) {
-		effect->Update();
+    if (isDebugCameraActive_) {
+		// デバッグカメラの更新
+		debugCamera_->Update();
+		camera_.matView = debugCamera_->GetCamera().matView;
+		camera_.matProjection = debugCamera_->GetCamera().matProjection;
+		// ビュープロジェクション行列の転送
+		camera_.TransferMatrix();
+	} else {
+		camera_.TransferMatrix();
 	}
-	// 終了フラグの立ったエフェクトを削除
-	effects_.remove_if([](Effect* effect) {
-		if (effect->IsFinished()) {
-			delete effect;
-			return true;
-		}
-		return false;
-	});*/
-
 }
 
 void GameScene::Draw() {
@@ -101,16 +71,6 @@ void GameScene::Draw() {
 
 	// 3Dモデル描画前処理
 	ModelPrim::PreDraw(dxCommon->GetCommandList());
-
-	// パーティクルの描画
-	//for (Particle* particle : particles_) {
-	//	particle->Draw(camera_);
-	//}
-
-	// エフェクトの描画
-	//for (Effect* effect : effects_) {
-	//	effect->Draw(camera_);
-	//}
 
 	cubeModelPrim_->Draw(worldTranform_, camera_, UVCheckerTexture_);
 

@@ -19,6 +19,7 @@
 
 using namespace std;
 using namespace Microsoft::WRL;
+using namespace KamataEngine::MathUtility;
 
 namespace KamataEngine {
 
@@ -182,7 +183,67 @@ ModelPrim* ModelPrim::CreateSquare(int count) {
 	return instance;
 }
 
-ModelPrim* ModelPrim::CreateRing(int count) { return nullptr; }
+ModelPrim* ModelPrim::CreateRing(uint32_t divideCount) {
+	ModelPrim* ring = new ModelPrim();
+
+	const float kOuterRadius = 1.0f; // デフォルトの外半径
+	const float kInnerRadius = 0.4f; // デフォルトの内半径
+	const float radianPerDivide = 2.0f * std::numbers::pi_v<float> / float(divideCount);
+
+	std::vector<Mesh::VertexPosNormalUv> vertices;
+	std::vector<uint32_t> indices;
+
+	for (uint32_t index = 0; index < divideCount; ++index) {
+		float theta = index * radianPerDivide;
+		float nextTheta = (index + 1) * radianPerDivide;
+
+		float sin = std::sin(theta);
+		float cos = std::cos(theta);
+		float sinNext = std::sin(nextTheta);
+		float cosNext = std::cos(nextTheta);
+
+		float u = float(index) / float(divideCount);
+		float uNext = float(index + 1) / float(divideCount);
+
+		Vector3 normal = {0.0f, 0.0f, 1.0f}; // 法線：Z+方向
+
+		Mesh::VertexPosNormalUv v0 = {
+		    {-sin * kOuterRadius, -cos * kOuterRadius, 0.0f},
+            normal, {u, 0.0f}
+        };
+		Mesh::VertexPosNormalUv v1 = {
+		    {-sinNext * kOuterRadius, -cosNext * kOuterRadius, 0.0f},
+            normal, {uNext, 0.0f}
+        };
+		Mesh::VertexPosNormalUv v2 = {
+		    {-sin * kInnerRadius, -cos * kInnerRadius, 0.0f},
+            normal, {u, 1.0f}
+        };
+		Mesh::VertexPosNormalUv v3 = {
+		    {-sinNext * kInnerRadius, -cosNext * kInnerRadius, 0.0f},
+            normal, {uNext, 1.0f}
+        };
+
+		uint32_t baseIndex = static_cast<uint32_t>(vertices.size());
+
+		vertices.push_back(v0);
+		vertices.push_back(v1);
+		vertices.push_back(v2);
+		vertices.push_back(v3);
+
+		// 三角形1枚目
+		indices.push_back(baseIndex + 0);
+		indices.push_back(baseIndex + 1);
+		indices.push_back(baseIndex + 2);
+		// 三角形2枚目
+		indices.push_back(baseIndex + 2);
+		indices.push_back(baseIndex + 1);
+		indices.push_back(baseIndex + 3);
+	}
+
+	ring->InitializeFromVertices(vertices, indices);
+	return ring;
+}
 
 void ModelPrim::PreDraw(ID3D12GraphicsCommandList* commandList) { ModelCommonPrim::GetInstance()->PreDraw(commandList); }
 

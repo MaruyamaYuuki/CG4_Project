@@ -53,4 +53,10 @@ private:
 	KamataEngine::ModelPrim* cubeModelPrim_ = nullptr;
 	// テクスチャハンドル
 	uint32_t UVCheckerTexture_ = 0;
+
+	KamataEngine::DebugCamera* debugCamera_ = nullptr;
+
+	bool isDebugCameraActive_ = false;
+
+	KamataEngine::Input* input = nullptr;
 };

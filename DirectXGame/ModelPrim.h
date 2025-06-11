@@ -145,7 +145,7 @@ public: // 静的メンバ関数
 	/// <summary>
 	/// 四角形モデルも使用した円生成
 	/// </summary>
-	static ModelPrim* CreateRing(int count);
+	static ModelPrim* CreateRing(uint32_t divideCount);
 
 	/// <summary>
 	/// 描画前処理
@@ -207,6 +207,12 @@ private: // メンバ変数
 	std::unique_ptr<Material> defaultMaterial_ = nullptr;
 	// ライト
 	const LightGroup* lightGroup_ = nullptr;
+
+	struct VertexData {
+		KamataEngine::Vector3 position;
+		KamataEngine::Vector2 uv;
+		KamataEngine::Vector4 color;
+	};
 
 private: // メンバ関数
 	/// <summary>
