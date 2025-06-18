@@ -19,6 +19,7 @@ GameScene::~GameScene() {
 	delete modelEffect_;
 	ModelPrim::StaticFinalize();
 	delete cubeModelPrim_;
+	delete debugCamera_;
 }
 
 
@@ -36,7 +37,7 @@ void GameScene::Initialize() {
 
 	UVCheckerTexture_ = TextureManager::Load("uvChecker.png");
 
-	cubeModelPrim_ = new ModelPrim();
+	//cubeModelPrim_ = new ModelPrim();
 	cubeModelPrim_ = ModelPrim::CreateRing(5);
 
 	 
