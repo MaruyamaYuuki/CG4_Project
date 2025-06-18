@@ -44,6 +44,10 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
+	if (input->TriggerKey(DIK_ESCAPE)) {
+		isFinished_ = true;
+	}
+
 
 	if (input->TriggerKey(DIK_D)) {
 		if (!isDebugCameraActive_) {

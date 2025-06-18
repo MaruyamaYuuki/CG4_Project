@@ -27,4 +27,7 @@ private:
 	uint32_t startGuideTexture_ = 0;
 
 	bool finished_ = false;
+
+	float waveTime_ = 0.0f;
+	float blinkTime_ = 0.0f;
 };

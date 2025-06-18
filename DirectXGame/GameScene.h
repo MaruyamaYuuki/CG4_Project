@@ -32,6 +32,8 @@ public:
 	/// <param name="position">位置</param>
 	void EffectBorn(KamataEngine::Vector3 position);
 
+	bool IsFinished() { return isFinished_; }
+
 private:
 	// ワールド変換データ
 	KamataEngine::WorldTransform worldTranform_;
@@ -59,4 +61,6 @@ private:
 	bool isDebugCameraActive_ = false;
 
 	KamataEngine::Input* input = nullptr;
+
+	bool isFinished_ = false;
 };
