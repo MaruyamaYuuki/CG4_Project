@@ -153,22 +153,22 @@ ModelPrim* ModelPrim::CreateSquare(int count) {
 		// 左下
 		vertices[vi + 0].pos = {offsetX - 0.5f, -0.5f, 0.0f};
 		vertices[vi + 0].uv = {0.0f, 1.0f};
-		vertices[vi + 0].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vi + 0].normal = {0.0f, 0.0f, -1.0f};
 
 		// 左上
 		vertices[vi + 1].pos = {offsetX - 0.5f, 0.5f, 0.0f};
 		vertices[vi + 1].uv = {0.0f, 0.0f};
-		vertices[vi + 1].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vi + 1].normal = {0.0f, 0.0f, -1.0f};
 
 		// 右下
 		vertices[vi + 2].pos = {offsetX + 0.5f, -0.5f, 0.0f};
 		vertices[vi + 2].uv = {1.0f, 1.0f};
-		vertices[vi + 2].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vi + 2].normal = {0.0f, 0.0f, -1.0f};
 
 		// 右上
 		vertices[vi + 3].pos = {offsetX + 0.5f, 0.5f, 0.0f};
 		vertices[vi + 3].uv = {1.0f, 0.0f};
-		vertices[vi + 3].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vi + 3].normal = {0.0f, 0.0f, -1.0f};
 
 		// インデックス
 		indices[ii + 0] = vi + 0;
@@ -202,8 +202,8 @@ ModelPrim* ModelPrim::CreateRing(uint32_t divideCount) {
 		float sinNext = std::sin(nextTheta);
 		float cosNext = std::cos(nextTheta);
 
-		float u = float(index) / float(divideCount);
-		float uNext = float(index + 1) / float(divideCount);
+		float u = 0.0f;
+		float uNext = -1.0f;
 
 		Vector3 normal = {0.0f, 0.0f, 1.0f}; // 法線：Z+方向
 
