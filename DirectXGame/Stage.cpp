@@ -19,10 +19,10 @@ void Stage::Initialise() {
 
 void Stage::Update() {
 	for (int i = 0; i < 2; ++i) {
-		xPos[i] += moveSpeed_;
+		xPos[i] -= moveSpeed_;
 
 		if (xPos[i] <= -1280.0f) {
-			xPos[i] += 1280.0f;
+			xPos[i] = 1280.0f;
 		}
 	}
 

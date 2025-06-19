@@ -20,6 +20,7 @@ GameScene::~GameScene() {
 	ModelPrim::StaticFinalize();
 	delete cubeModelPrim_;
 	delete stage_;
+	delete debugCamera_;
 }
 
 

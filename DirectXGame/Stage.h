@@ -21,7 +21,7 @@ private:
 	KamataEngine::Sprite* iwayamaSprite_ = nullptr;
 	KamataEngine::Sprite* iwayamaRvSprite_ = nullptr;
 
-	float moveSpeed_ = 0.05f;
+	float moveSpeed_ = 1.0f;
 
 	float xPos[2] = {{0.0f}, {1280.0f}};
 };
