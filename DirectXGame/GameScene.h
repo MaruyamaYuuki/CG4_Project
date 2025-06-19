@@ -3,6 +3,7 @@
 #include "Particle.h"
 #include "Effect.h"
 #include "ModelPrim.h"
+#include "Stage.h"
 
 // ゲームシーン
 class GameScene {
@@ -63,4 +64,6 @@ private:
 	KamataEngine::Input* input = nullptr;
 
 	bool isFinished_ = false;
+
+	Stage* stage_ = nullptr;
 };

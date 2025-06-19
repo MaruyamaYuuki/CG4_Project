@@ -19,6 +19,7 @@ GameScene::~GameScene() {
 	delete modelEffect_;
 	ModelPrim::StaticFinalize();
 	delete cubeModelPrim_;
+	delete stage_;
 }
 
 
@@ -39,7 +40,9 @@ void GameScene::Initialize() {
 	cubeModelPrim_ = new ModelPrim();
 	cubeModelPrim_ = ModelPrim::CreateRing(5);
 
-	 
+	stage_ = new Stage();
+	stage_->Initialise();
+
 	debugCamera_ = new DebugCamera(1280, 720);
 }
 
@@ -48,6 +51,7 @@ void GameScene::Update() {
 		isFinished_ = true;
 	}
 
+	stage_->Update();
 
 	if (input->TriggerKey(DIK_D)) {
 		if (!isDebugCameraActive_) {
@@ -72,6 +76,10 @@ void GameScene::Update() {
 void GameScene::Draw() {
 	// DirectXCommon インスタンスの取得
 	KamataEngine::DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+
+	Sprite::PreDraw(dxCommon->GetCommandList());
+	stage_->Draw();
+	Sprite::PostDraw();
 
 	// 3Dモデル描画前処理
 	ModelPrim::PreDraw(dxCommon->GetCommandList());
