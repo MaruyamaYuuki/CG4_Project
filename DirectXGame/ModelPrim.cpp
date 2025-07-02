@@ -202,8 +202,8 @@ ModelPrim* ModelPrim::CreateRing(uint32_t divideCount) {
 		float sinNext = std::sin(nextTheta);
 		float cosNext = std::cos(nextTheta);
 
-		float u = 0.0f;
-		float uNext = -1.0f;
+        float u = float(index) / divideCount;
+		float uNext = float(index + 1) / divideCount;
 
 		Vector3 normal = {0.0f, 0.0f, 1.0f}; // 法線：Z+方向
 

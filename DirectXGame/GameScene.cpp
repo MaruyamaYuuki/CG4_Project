@@ -38,7 +38,7 @@ void GameScene::Initialize() {
 	UVCheckerTexture_ = TextureManager::Load("uvChecker.png");
 
 	//cubeModelPrim_ = new ModelPrim();
-	cubeModelPrim_ = ModelPrim::CreateRing(5);
+	cubeModelPrim_ = ModelPrim::CreateRing(8);
 
 	 
 	debugCamera_ = new DebugCamera(1280, 720);
