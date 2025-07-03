@@ -4,6 +4,7 @@
 #include "Effect.h"
 #include "ModelPrim.h"
 #include "Stage.h"
+#include "Player.h"
 
 // ゲームシーン
 class GameScene {
@@ -66,4 +67,7 @@ private:
 	bool isFinished_ = false;
 
 	Stage* stage_ = nullptr;
+
+	KamataEngine::Model* modelPlayer_ = nullptr;
+	Player* player_ = nullptr;
 };

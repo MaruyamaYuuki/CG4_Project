@@ -21,6 +21,8 @@ GameScene::~GameScene() {
 	delete cubeModelPrim_;
 	delete stage_;
 	delete debugCamera_;
+	delete player_;
+	delete modelPlayer_;
 }
 
 
@@ -45,6 +47,10 @@ void GameScene::Initialize() {
 	stage_->Initialise();
 
 	debugCamera_ = new DebugCamera(1280, 720);
+
+	modelPlayer_ = Model::CreateFromOBJ("player", true);
+	player_ = new Player();
+	player_->Initialize(modelPlayer_, input);
 }
 
 void GameScene::Update() {
@@ -53,6 +59,8 @@ void GameScene::Update() {
 	}
 
 	stage_->Update();
+
+	player_->Update();
 
 	if (input->TriggerKey(DIK_D)) {
 		if (!isDebugCameraActive_) {
@@ -78,17 +86,38 @@ void GameScene::Draw() {
 	// DirectXCommon インスタンスの取得
 	KamataEngine::DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
+	// スプライト描画前処理
 	Sprite::PreDraw(dxCommon->GetCommandList());
+
 	stage_->Draw();
+
+	// スプライト描画後処理
 	Sprite::PostDraw();
+
+	// 深度バッファクリア
+	dxCommon->ClearDepthBuffer();
+	
+	// 3Dモデル描画前処理
+	Model::PreDraw(dxCommon->GetCommandList());
+
+	player_->Draw(camera_);
+
+	// 3Dモデル描画後処理
+	Model::PostDraw();
 
 	// 3Dモデル描画前処理
 	ModelPrim::PreDraw(dxCommon->GetCommandList());
 
-	cubeModelPrim_->Draw(worldTranform_, camera_, UVCheckerTexture_);
+	//cubeModelPrim_->Draw(worldTranform_, camera_, UVCheckerTexture_);
 
 	// 3Dモデル描画後処理
 	ModelPrim::PostDraw();
+
+	// スプライト描画前処理
+	Sprite::PreDraw(dxCommon->GetCommandList());
+
+	// スプライト描画後処理
+	Sprite::PostDraw();
 }
 
 void GameScene::ParticleBorn(Vector3 position) {
