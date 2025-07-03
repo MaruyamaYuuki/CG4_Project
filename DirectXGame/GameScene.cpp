@@ -23,6 +23,7 @@ GameScene::~GameScene() {
 	delete debugCamera_;
 	delete player_;
 	delete modelPlayer_;
+	delete graph_;
 }
 
 
@@ -51,6 +52,9 @@ void GameScene::Initialize() {
 	modelPlayer_ = Model::CreateFromOBJ("player", true);
 	player_ = new Player();
 	player_->Initialize(modelPlayer_, input);
+
+	graph_ = new GraphDisplay();
+	graph_->initialize(input);
 }
 
 void GameScene::Update() {
@@ -59,6 +63,8 @@ void GameScene::Update() {
 	}
 
 	stage_->Update();
+
+	graph_->Update();
 
 	player_->Update();
 
@@ -115,6 +121,8 @@ void GameScene::Draw() {
 
 	// スプライト描画前処理
 	Sprite::PreDraw(dxCommon->GetCommandList());
+
+	graph_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

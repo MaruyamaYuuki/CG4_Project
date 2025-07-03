@@ -5,6 +5,7 @@
 #include "ModelPrim.h"
 #include "Stage.h"
 #include "Player.h"
+#include "GraphDisplay.h"
 
 // ゲームシーン
 class GameScene {
@@ -70,4 +71,6 @@ private:
 
 	KamataEngine::Model* modelPlayer_ = nullptr;
 	Player* player_ = nullptr;
+
+	GraphDisplay* graph_ = nullptr;
 };
