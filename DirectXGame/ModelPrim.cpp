@@ -205,7 +205,7 @@ ModelPrim* ModelPrim::CreateRing(uint32_t divideCount) {
         float u = float(index) / divideCount;
 		float uNext = float(index + 1) / divideCount;
 
-		Vector3 normal = {0.0f, 0.0f, 1.0f}; // 法線：Z+方向
+		Vector3 normal = {0.0f, 0.0f, -1.0f};
 
 		Mesh::VertexPosNormalUv v0 = {
 		    {-sin * kOuterRadius, -cos * kOuterRadius, 0.0f},
