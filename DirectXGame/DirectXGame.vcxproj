@@ -111,6 +111,7 @@
     <ClCompile Include="GraphDisplay.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelPrim.cpp" />
+    <ClCompile Include="NumberCount.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GraphDisplay.h" />
     <ClInclude Include="ModelPrim.h" />
+    <ClInclude Include="NumberCount.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Stage.h" />
