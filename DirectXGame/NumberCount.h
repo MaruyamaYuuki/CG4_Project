@@ -14,7 +14,9 @@ public:
 private:
 	KamataEngine::Vector2 size = {32.0f, 64.0f};
 
-	uint32_t numberTextureHandle_ = 0;
+	uint32_t textureHandle_ = 0;
 
-	KamataEngine::Sprite* numberSprite_[5];
+	KamataEngine::Sprite* sprite_[5];
+
+	int number = 0;
 };

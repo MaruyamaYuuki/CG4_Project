@@ -6,6 +6,7 @@
 #include "Stage.h"
 #include "Player.h"
 #include "GraphDisplay.h"
+#include "NumberCount.h"
 
 // ゲームシーン
 class GameScene {
@@ -73,4 +74,6 @@ private:
 	Player* player_ = nullptr;
 
 	GraphDisplay* graph_ = nullptr;
+
+	NumberCount* numberCount_ = nullptr;
 };

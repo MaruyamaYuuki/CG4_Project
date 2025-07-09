@@ -24,6 +24,7 @@ GameScene::~GameScene() {
 	delete player_;
 	delete modelPlayer_;
 	delete graph_;
+	delete numberCount_;
 }
 
 
@@ -55,6 +56,9 @@ void GameScene::Initialize() {
 
 	graph_ = new GraphDisplay();
 	graph_->initialize(input);
+
+	numberCount_ = new NumberCount();
+	numberCount_->Initialize();
 }
 
 void GameScene::Update() {
@@ -65,6 +69,8 @@ void GameScene::Update() {
 	stage_->Update();
 
 	graph_->Update();
+
+	numberCount_->Update();
 
 	player_->Update();
 
@@ -123,6 +129,7 @@ void GameScene::Draw() {
 	Sprite::PreDraw(dxCommon->GetCommandList());
 
 	graph_->Draw();
+	numberCount_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
