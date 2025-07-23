@@ -5,7 +5,7 @@ class NumberCount {
 public:
 	~NumberCount();
 
-	void Initialize();
+	void Initialize(KamataEngine::Input* input);
 
 	void Update();
 
@@ -19,4 +19,8 @@ private:
 	KamataEngine::Sprite* sprite_[5];
 
 	int number = 0;
+
+	KamataEngine::Input* input_ = nullptr;
+
+	bool countStart_ = false;
 };

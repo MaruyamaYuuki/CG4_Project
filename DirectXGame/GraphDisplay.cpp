@@ -23,11 +23,17 @@ void GraphDisplay::initialize(KamataEngine::Input* input) {
 }
 
 void GraphDisplay::Update() {
-	if (input_->PushKey(DIK_RETURN)) {
-		if (maxXSize > 0) {
-			maxXSize -= 0.5f;
+	if (input_->TriggerKey(DIK_RETURN)) {
+		if (!isStart_) {
+			isStart_ = true;
+		} else {
+			isStart_ = false;
 		}
 	}
+	if (maxXSize > 0 && isStart_){
+		maxXSize -= 0.5f;
+	}
+
 	greenGraphSprite_->SetSize({maxXSize, 48.0f});
 }
 

@@ -58,7 +58,7 @@ void GameScene::Initialize() {
 	graph_->initialize(input);
 
 	numberCount_ = new NumberCount();
-	numberCount_->Initialize();
+	numberCount_->Initialize(input);
 }
 
 void GameScene::Update() {

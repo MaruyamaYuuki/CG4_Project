@@ -8,17 +8,30 @@ NumberCount::~NumberCount() {
 	}
 }
 
-void NumberCount::Initialize() {
+void NumberCount::Initialize(Input* input) {
+	input_ = input;
+
 	textureHandle_ = TextureManager::Load("number.png");
 
 	for (int i = 0; i < 5; i++) {
 		sprite_[i] = Sprite::Create(textureHandle_, {100.0f + size.x * i, 5});
 		sprite_[i]->SetSize(size);
 	}
+
+	countStart_ = false;
 }
 
 void NumberCount::Update() {
-	if (number < 10000) {
+	if (input_->TriggerKey(DIK_SPACE)) {
+		if (!countStart_) {
+            countStart_ = true;
+		} else {
+            countStart_ = false;
+		}
+		
+	}
+
+	if (number < 10000 && countStart_) {
 		number++;
 	}
 

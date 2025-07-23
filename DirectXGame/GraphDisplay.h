@@ -23,4 +23,6 @@ private:
 	KamataEngine::Sprite* greenGraphSprite_ = nullptr;
 
 	float maxXSize = 300.0f;
+
+	bool isStart_ = false;
 };
